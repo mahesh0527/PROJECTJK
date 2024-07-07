@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="{{url_for('static', filename='tablogo.jpg')}}" type="image/x-icon">
+    <link rel="stylesheet" href="{{url_for('static', filename='navi.css')}}">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <style>
+        body {
+            background-repeat: no-repeat;
+            background-position: center; 
+            background-size: cover;
+            background-attachment: fixed;
+            background-image: url('{{url_for('static', filename='WhatsApp Image 2024-06-03 at 11.43.09_7b9c103e.jpg')}}');
+        }
+        .heading {
+            font-size: 29px;
+            text-align: center;
+            font-weight: bold;
+            letter-spacing: 5px;
+        }
+        .name {
+            font-size: 40px;
+            text-align: center;
+            font-weight: bold;
+            letter-spacing: 10px;
+        }
+        .head_text {
+            margin: 150px;
+            color: #293a34;
+            background-image: linear-gradient(transparent 13%, currentColor 30%, currentColor 70%, transparent 90%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            background-attachment: fixed;
+        }
+        .head_text > * {
+            color: transparent;
+        }
+        .grid_box {
+            display: grid;
+            margin: 50px;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            column-gap: 20px;
+        }
+        .container_1 {
+            background-color: rgb(225, 255, 244);
+            border-radius: 10px;
+            padding: 10px;
+        }
+        .heading_box {
+            font-size: larger;
+            font-weight: bold;
+        }
+        .grid_box_2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            margin: 20px;
+            font-size: small;
+            column-gap: 10px;
+            row-gap: 15px;
+        }
+        .image_product {
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
+            mix-blend-mode: normal;
+        }
+        .box {
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .box_image {
+            width: 100px;
+            height: 100px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        a.link {
+            color: blue;
+            text-decoration: underline;
+            margin: 10px 15px;
+            font-size: 14px;
+        }
+        .search {
+            display: flex;
+            width: 40vw;
+            padding: 7px;
+            border-radius: 10px;
+            border: none;
+            box-shadow: 0px 0px 2px;
+            outline: none;
+            position: relative;
+        }
+        .search-results {
+            display: none;
+            position: absolute;
+            background: white;
+            border: 1px solid #ddd;
+            max-height: 200px;
+            overflow-y: auto;
+            width: 100%;
+            z-index: 1000;
+        }
+        .search-results a {
+            display: block;
+            padding: 10px;
+            color: black;
+            text-decoration: none;
+        }
+        .search-results a:hover {
+            background-color: #f1f1f1;
+        }
+        .price {
+            font-weight: bold;
+            color: rgb(214, 0, 0);
+        }
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+        }
+        .logo {
+            height: 40px;
+        }
+        .info {
+            display: flex;
+            gap: 15px;
+        }
+        .sidebar {
+            height: calc(100% - 10px); 
+            width: 250px;
+            position: fixed;
+            top: 50px;
+            left: 0;
+            background-color: #f8f9fa;
+            padding-top: 20px;
+            overflow-y: auto;
+            display: none;
+            z-index: 1;
+        }
+        .sidebar a {
+            padding: 10px 15px;
+            text-decoration: none;
+            font-size: 18px;
+            color: #000;
+            display: block;
+        }
+        .sidebar a:hover {
+            background-color: #ddd;
+        }
+        .sidebarbutton {
+            background: none;
+            border: none;
+            font-size: 25px;
+            margin-top: 7px;
+        }
+        .sidebarbutton:hover {
+            opacity: 0.7;
+            cursor: pointer;
+        }
+        .sidebarbutton:active {
+            opacity: 0.5;
+        }
+        .side_bar_close {
+            margin-left: 3px;
+            margin-top: 0px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="sidebar" class="sidebar">
+        <div class="close">
+           <button class="side_bar_close" onclick="w3_close()"> &#x2715; </button>
+        </div>
+        <a href="#">Trending</a>
+        
+        {% if current_user.is_authenticated %}
+        <a href="{{ url_for('logout') }}">Logout</a>
+        {% endif %}
+        <div class="category">
+            {% for category in categories %}
+            <a href="{{ url_for('category_page', category_name=category) }}">{{ category.replace('_', ' ').title() }}</a>
+            {% endfor %}
+        </div>
+        <a href="#">Customer Service</a>
+    </div>
+
+    <div class="nav">
+        <div class="image">
+            <button class="sidebarbutton" onclick="w3_open()">☰</button>
+            <a href="{{ url_for('home') }}">
+                <img src="{{ url_for('static', filename='logo.jpg') }}" alt="Logo" class="logo">
+            </a>
+        </div>
+        <div class="search_div">
+            <input type="text" name="search" id="search" class="search" placeholder="Search">
+            <div id="search-results" class="search-results"></div>
+        </div>
+        <div class="info">
+            <div class="About"><a href="{{ url_for('about') }}">About</a></div>
+            {% if not current_user.is_authenticated %}
+            <div class="About"><a href="{{ url_for('login') }}">Login</a></div>
+            <div class="About"><a href="{{ url_for('signup') }}">Signup</a></div>
+            
+            {% else %}
+            <div class="cart"><a href="{{ url_for('cart') }}"><i class="fa-solid fa-cart-shopping"></i></a></div>
+            <div class="About"><a href="{{ url_for('logout') }}">Logout</a></div>
+            {% endif %}
+        </div>
+    </div>
+    
+    <div class="head_text">
+        <p class="heading">WELCOME TO </p> 
+        <p class="name">JK STORES</p>
+    </div>
+    <div class="grid_box">
+        <div class="container_1">
+            <p class="heading_box">Electronics</p>
+            <div class="grid_box_2">
+                {% for i in Ele %}
+                <div class="box">
+                    <a href="{{ url_for('productpage', product_id=i.id) }}">
+                        <div class="box_image">
+                            <img class="image_product" src="{{ i.image }}" alt="">
+                        </div>
+                        <p>{{ i.name[:30] }}....</p>
+                        <p class="price">&#8377 {{i.discount_price}}</p>
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    
+        <div class="container_1">
+            <p class="heading_box">Air Conditioners</p>
+            <div class="grid_box_2">
+                {% for i in Gam %}
+                <div class="box">
+                    <a href="{{ url_for('productpage', product_id=i.id) }}">
+                        <div class="box_image">
+                            <img class="image_product" src="{{ i.image }}" alt="">
+                        </div>
+                        <p>{{ i.name[:30] }}....</p>
+                        <p class="price">&#8377 {{i.discount_price}}</p>
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    
+        <div class="container_1">
+            <p class="heading_box">Beauty Products</p>
+            <div class="grid_box_2">
+                {% for i in Mov %}
+                <div class="box">
+                    <a href="{{ url_for('productpage', product_id=i.id) }}">
+                        <div class="box_image">
+                            <img class="image_product" src="{{ i.image }}" alt="">
+                        </div>
+                        <p>{{ i.name[:30] }}....</p>
+                        <p class="price">&#8377 {{i.discount_price}}</p>
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    
+        <div class="container_1">
+            <p class="heading_box">Grocery Products</p>
+            <div class="grid_box_2">
+                {% for i in Gym %}
+                <div class="box">
+                    <a href="{{ url_for('productpage', product_id=i.id) }}">
+                        <div class="box_image">
+                            <img class="image_product" src="{{ i.image }}" alt="">
+                        </div>
+                        <p>{{ i.name[:30] }}....</p>
+                        <p class="price">&#8377 {{i.discount_price}}</p>
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        document.getElementById('search').addEventListener('input', function() {
+            let query = this.value;
+            if (query.length > 0) {
+                fetch(`/search_suggestions?q=${query}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        let resultsDiv = document.getElementById('search-results');
+                        resultsDiv.innerHTML = '';
+                        data.forEach(product => {
+                            let link = document.createElement('a');
+                            link.href = `/product/${product.id}`;
+                            link.textContent = product.name;
+                            resultsDiv.appendChild(link);
+                        });
+                        resultsDiv.style.display = 'block';
+                    });
+            } else {
+                document.getElementById('search-results').style.display = 'none';
+            }
+        });
+
+        function w3_open() {
+            document.getElementById("sidebar").style.display = "block";
+        }
+
+        function w3_close() {
+            document.getElementById("sidebar").style.display = "none";
+        }
+    </script>
+</body>
+</html>

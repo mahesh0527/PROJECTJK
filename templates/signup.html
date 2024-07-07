@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="{{url_for('static',filename='tablogo.jpg') }}" type="image/x-icon">
+    <link rel="stylesheet" href="{{url_for('static',filename='navi.css')}}">
+
+    <style>
+        .signup {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        .signup .signup_box{
+           display: flex;
+           flex-direction: column;
+           padding: 20px 30px;
+           box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+           border-radius: 20px;
+           
+        }
+        .signup .title {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #1E0342;
+        }
+        .form {
+            display: flex;
+            flex-direction: column;
+            width: 300px;
+        }
+        .form label {
+            margin-bottom: 5px;
+            color: #333;
+            display: block;
+        }
+        .form input[type="text"],
+        .form input[type="email"],
+        .form input[type="password"] {
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+            width: 90%;
+        }
+        .form input[type="submit"] {
+            padding: 10px;
+            background-color: #3AB795;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: block;
+        }
+        .form input[type="submit"]:hover {
+            background-color: #F2B79F;
+        }
+        .redirect{
+            display: flex;
+            flex-direction: column;
+            align-items: end;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <div class="image">
+            <a href="{{ url_for('home') }}">
+                <img src="{{ url_for('static', filename='logo.jpg') }}" alt="Logo" class="logo">
+            </a>
+        </div>
+        <div class="search_div">
+            <input type="text" name="" id="" class="search" placeholder="Search">
+        </div>
+        <div class="info">
+            <div class="About"><a href="{{ url_for('about') }}">About</a></div>
+            {% if not current_user.is_authenticated %}
+            <div class="About"><a href="{{ url_for('login') }}">Login</a></div>
+            <div class="About"><a href="{{ url_for('signup') }}">Signup</a></div>
+            
+            {% else %}
+            <div class="cart"><a href="{{ url_for('cart') }}"><i class="fa-solid fa-cart-shopping"></i></a></div>
+            <div class="About"><a href="{{ url_for('logout') }}">Logout</a></div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="signup">
+        <div class="signup_box">
+
+            <p class="title">
+                Signup
+            </p>
+            <div class="form">
+                <form action="/signup" method="post">
+                    <label for="name">Name :</label>
+                    <input type="text" name="name" id="name">
+                    <label for="user_name">Username :</label>
+                    <input type="text" name="user_name" id="user_name">
+                    <label for="email">Email :</label>
+                    <input type="email" name="Email" id="email">
+                    <label for="Password">Password :</label>
+                    <input type="password" name="password" id="Password">
+
+                    <div class="redirect">
+                        <input type="submit" value="Submit ..">
+                        Have an account? <a href="{{ url_for('login') }}">login</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    
+</body>
+<script src="https://kit.fontawesome.com/134a439898.js" crossorigin="anonymous"></script>
+</html>

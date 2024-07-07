@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ product.name }}</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='tablogo.jpg') }}" type="image/x-icon">
+    <link rel="stylesheet" href="{{ url_for('static', filename='navi.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        body {
+            font-family: 'Exo 2', sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            background-repeat: no-repeat;
+            background-position: center; 
+            background-size: cover;
+            background-attachment: fixed;
+            background-image: url('{{url_for('static', filename='WhatsApp Image 2024-06-03 at 11.43.09_7b9c103e.jpg')}}');
+        }
+        .nav{
+            display: flex;
+            flex-direction: row;
+            top: 0;
+            right: 0;
+            left: 0;
+            position: fixed;
+            align-items: center;
+            justify-content: space-between;
+            height: 55px;
+        } 
+        .logo{
+            width:50px;
+            mix-blend-mode:overlay;
+            margin-left: 10px;
+            object-fit: cover;
+            margin-top: 3px;
+        }
+        .product-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 1300px;
+            margin: 20px auto;
+            background-color: #e7e7e77d;
+            padding-left: 85px;
+            padding-right: 85px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 70px;
+            margin-bottom: 60px;
+        }
+        .product-content {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            background-color: #ffffff;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+        }
+        .product-image {
+            background-color: #ffffff;
+            max-width: 70%;
+            height: auto;
+            border: 1px solid #ddd;
+            padding: 10px;
+            box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            margin-left: 15px;
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+        .product-details {
+            flex: 1;
+            padding: 20px;
+        }
+        .product-details h2 {
+            margin: 10px 0;
+            font-size: 28px;
+            color: #141313;
+        }
+        .product-details p {
+            margin: 5px 0;
+            font-size: 18px;
+            font-weight: bold;
+            color: #ff3604;
+        }
+        .product-price span {
+            text-decoration: line-through;
+            color: #888;
+            margin-left: 10px;
+        }
+        .product-rating {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+        }
+        .product-rating .rating-count {
+            margin-left: 10px;
+            color: #ffd700;
+        }
+        .button {
+            margin-top: 20px;
+        }
+        .button form {
+            display: flex;
+            align-items: center;
+        }
+        .button-quantity {
+            border-radius: 5px;
+            background-color: #000;
+            color: gold;
+            border: none;
+            padding: 8px 12px;
+            margin-left: 10px;
+        }
+        .button-add_to_cart {
+            border-radius: 5px;
+            background-color: aqua;
+            color: #000;
+            border: none;
+            padding: 8px 12px;
+            margin-left: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .button-add_to_cart:hover {
+            background-color: #000;
+            color: blanchedalmond;
+        }
+        .recommendations {
+            margin-top: 40px;
+            margin-bottom: 30px;
+            text-align: center;
+            
+        }
+        .recommendations h3 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #333;
+            font-style: italic;
+            font-weight: bold;
+        }
+        .product-list {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        .product-item {
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 9px;
+            width: 200px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .product-item img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 10px;
+        }
+        .product-item h4 {
+            font-size: 18px;
+            color: #333;
+            margin: 10px 0;
+        }
+        .buy_now{
+            border: none;
+            background-color: hsl(0, 100%, 60%);
+            color: white;
+            margin-left: 10px;
+            margin-bottom: 20px;
+            padding: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.1s, color 0.1s;
+        }
+        .buy_now:hover{
+            opacity: 0.6;
+            background-color: hsl(0, 99%, 50%);
+        }
+        .buy_now:active{
+            background-color: hsl(0, 99%, 41%);
+        }
+
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <div class="image">
+            <a href="{{ url_for('home') }}">
+                <img src="{{ url_for('static', filename='logo.jpg') }}" alt="Logo" class="logo">
+            </a>
+        </div>
+        <div class="search_div">
+            <input type="text" name="" id="" class="search" placeholder="Search">
+        </div>
+        <div class="info">
+            <div class="About"><a href="{{ url_for('about') }}">About</a></div>
+            {% if not current_user.is_authenticated %}
+            <div class="About"><a href="{{ url_for('login') }}">Login</a></div>
+            <div class="About"><a href="{{ url_for('signup') }}">Signup</a></div>
+            {% else %}
+            <div class="cart"><a href="{{ url_for('cart') }}"><i class="fa fa-shopping-cart"></i></a></div>
+            <div class="About"><a href="{{ url_for('logout') }}">Logout</a></div>
+            {% endif %}
+        </div>
+    </div>
+    <div class="product-container">
+        <div class="product-content">
+            <img src="{{ product.image }}" alt="{{ product.name }}" class="product-image">
+            <div class="product-details">
+                <h2>{{ product.name }}</h2>
+                <p class="product-price">${{ product.discount_price }}</p>
+                <div class="product-rating">
+                    <span class="rating-count">({{ product.review_count }} reviews)</span>
+                </div>
+                <div class="button">
+                    <form method="post">
+                        <label for="quantity">Quantity:</label>
+                        <input class="button-quantity" type="number" name="quantity" id="quantity" min="1" max="1000" value="1">
+                        <input class="button-add_to_cart" name="add_to_cart" type="submit" value="Add to cart">
+                        <input class="button buy_now" name="buy_now" type="submit" value="Buy now">
+                    </form>
+                </div>
+
+                
+            </div>
+
+        </div>
+        <div class="recommendations">
+            <h3>Recommended Products</h3>
+            <div class="product-list">
+                {% for recommended_product in recommendations %}
+                <div class="product-item">
+                    <a href="{{ url_for('productpage', product_id=recommended_product.id) }}">
+                        <img src="{{ recommended_product.image }}" alt="{{ recommended_product.name }}">
+                        <h4>{{ recommended_product.name }}</h4>
+                        <p>${{ recommended_product.discount_price }}</p>
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</body>
+<script src="https://kit.fontawesome.com/134a439898.js" crossorigin="anonymous"></script>
+</html>

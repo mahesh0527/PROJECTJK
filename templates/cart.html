@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='tablogo.jpg') }}" type="image/x-icon">
+    <link rel="stylesheet" href="{{ url_for('static', filename='navi.css') }}">
+    <style>
+        body {
+            font-family: 'Exo 2', sans-serif;
+            background-color: #f0f8ff;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            padding: 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #333;
+        }
+        .cart-item {
+            display: flex;
+            align-items: center;
+            background-color: #fff;
+            margin-bottom: 15px;
+            padding: 20px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+        .cart-item img {
+            width: 100px;
+            height: auto;
+            margin-right: 15px;
+            
+        }
+        .cart-item-details {
+            flex-grow: 1;
+        }
+        .cart-item-name {
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+        .cart-item-category {
+            color: #666;
+            margin-bottom: 5px;
+        }
+        .cart-item-price {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        .cart-item-quantity {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+        .delete-button {
+            background-color: #000000;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            cursor: pointer;
+        }
+        .delete-button:hover {
+            background-color: #f3b35f;
+            border-radius: 6px;
+        }
+        .continue-shopping {
+            display: block;
+            width: 200px;
+            margin: 20px auto;
+            padding: 10px 20px;
+            text-align: center;
+            background-color: #9be99e;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .continue-shopping:hover {
+            background-color: #ffffff;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <div class="image">
+            <a href="{{ url_for('home') }}">
+                <img src="{{ url_for('static', filename='logo.jpg') }}" alt="Logo" class="logo">
+            </a>
+        </div>
+        <div class="search_div">
+            <input type="text" name="" id="" class="search" placeholder="Search">
+        </div>
+        <div class="info">
+            <div class="About"><a href="{{ url_for('about') }}">About</a></div>
+            {% if not current_user.is_authenticated %}
+            <div class="About"><a href="{{ url_for('login') }}">Login</a></div>
+            <div class="About"><a href="{{ url_for('signup') }}">Signup</a></div>
+            {% else %}
+            <div class="About"><a href="{{ url_for('cart') }}"><i class="fa-solid fa-cart-shopping"></i></a></div>
+            <div class="About"><a href="{{ url_for('logout') }}">Logout</a></div>
+            {% endif %}
+        </div>
+    </div>
+    <div class="container">
+        <h2>Your Cart</h2>
+        {% for item, product in cart_items %}
+        <div class="cart-item">
+            <a href="{{ url_for('productpage', product_id=item.id) }}">
+                <img src="{{ item.image }}" alt="">
+            </a>
+            <div class="cart-item-details">
+                <div class="cart-item-name">
+                    <a href="{{ url_for('productpage', product_id=item.id) }}">{{ item.name }}</a>
+                </div>
+                <div class="cart-item-category">{{ item.sub_category }}</div>
+                <div class="cart-item-price">${{ item.discount_price }}</div>
+                <div class="cart-item-quantity">Quantity: {{ product.quantity }}</div>
+            </div>
+            <form method="post" style="display:inline;">
+                <input type="hidden" name="delete_item_id" value="{{ item.id }}">
+                <button type="submit" class="delete-button">Delete</button>
+            </form>
+        </div>
+        {% endfor %}
+        <a href="{{ url_for('home') }}" class="continue-shopping">Continue Shopping</a>
+    </div>
+    <script src="https://kit.fontawesome.com/134a439898.js" crossorigin="anonymous"></script>
+</body>
+</html>

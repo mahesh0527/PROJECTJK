@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="{{url_for('static',filename='tablogo.jpg') }}" type="image/x-icon">
+    <link rel="stylesheet" href="{{url_for('static',filename='navi.css')}}">
+    <style>
+        body {
+            font-family: 'Exo 2', sans-serif;
+        }
+        .information {
+            margin: 20px;
+        }
+        .title {
+            font-size: 60px;
+            margin: 20px 0;
+        }
+        .head {
+            font-size: 30px;
+            margin: 10px 0;
+        }
+        .text {
+            margin: 5px 10px;
+        }
+        .main {
+            text-align: center;
+            padding: 50px;
+            background-size: 400px;
+            /* background-image: url('{{url_for('static',filename='g')}}') */
+        }
+        .ul_none {
+            list-style-type: none;
+        }
+        .rest_text {
+            background-image: linear-gradient(#0d32378e, #092427);
+            box-shadow: 0 0 20px #233739;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .social-icons {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .social-icons i {
+            font-size: 24px;
+            transition: transform 0.3s;
+        }
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <div class="image">
+            <a href="{{ url_for('home') }}">
+                <img src="{{ url_for('static', filename='logo.jpg') }}" alt="Logo" class="logo">
+            </a>
+        </div>
+        <div class="search_div">
+            <input type="text" name="" id="" class="search" placeholder="Search">
+        </div>
+        <div class="info">
+            <div class="About"><a href="{{ url_for('about') }}">About</a></div>
+            {% if not current_user.is_authenticated %}
+            <div class="About"><a href="{{ url_for('login') }}">Login</a></div>
+            <div class="About"><a href="{{ url_for('signup') }}">Signup</a></div>
+            
+            {% else %}
+            <div class="cart"><a href="{{ url_for('cart') }}"><i class="fa-solid fa-cart-shopping"></i></a></div>
+            <div class="About"><a href="{{ url_for('logout') }}">Logout</a></div>
+            {% endif %}
+        </div>
+    </div>
+    <div class="information">
+        <div class="main">
+            <p class="title">About JK Stores</p>
+        </div>
+        <div class="rest_text">
+            <p class="head">Company Overview</p>
+            <p class="text">Welcome to JK Stores, your one-stop-shop for everything you need! Founded in 2020 by Jane Doe and Kevin Smith, JK Stores has quickly grown to become a leading name in the e-commerce industry. What started as a small startup in a garage has now blossomed into a trusted platform serving millions of customers worldwide.</p>
+
+            <p class="head">Mission Statement</p>
+            <p class="text">At JK Stores, our mission is to make online shopping easy, convenient, and enjoyable. We aim to provide a vast selection of high-quality products at competitive prices, coupled with exceptional customer service.</p>
+
+            <p class="head">Vision and Values</p>
+            <p class="text">Our vision is to be the most customer-centric company, where customers can find and discover anything they might want to buy online. We are guided by four core values:</p>
+            <ul class="text">
+                <li>Customer Obsession: We start with the customer and work backward.</li>
+                <li>Innovation: We strive to innovate and simplify.</li>
+                <li>Quality: We ensure the highest quality in our products and services.</li>
+                <li>Integrity: We operate with transparency and integrity.</li>
+            </ul>
+
+            <p class="head">The Team</p>
+            <ul class="text">
+                <li>Mahesh Babu</li>
+                <li>Jayanth Kumar</li>
+            </ul>
+
+            <p class="head">Customer Testimonials</p>
+            <p class="text">We are grateful for the feedback from our satisfied customers:</p>
+            <ul class="ul_none text">
+                <li>"JK Stores offers an incredible variety of products at unbeatable prices. Their customer service is top-notch!" — Sarah L.</li>
+                <li>"I love shopping at JK Stores. They always deliver on time and have excellent customer support." — Michael B.</li>
+            </ul>
+
+            <p class="head">Contact Us</p>
+            <p class="text">Have questions or feedback? Reach out to us!</p>
+            <p class="text">Email: support@jkstores.com</p>
+            <p class="text">Phone: 1-800-555-1234</p>
+            <p class="text">Follow us:</p>
+            <div class="social-icons">
+                    <i class="fab fa-facebook"></i>
+                    <i class="fab fa-twitter"></i>
+                    <i class="fab fa-instagram"></i>
+                </div>
+        </div>
+    </div>
+</body>
+<script src="https://kit.fontawesome.com/134a439898.js" crossorigin="anonymous"></script>
+
+</html>

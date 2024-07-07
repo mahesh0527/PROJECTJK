@@ -1,0 +1,89 @@
+*{
+    margin: 0;
+    font-family:'Exo 2', 'Arial Narrow', Arial, sans-serif ;
+}
+.nav{
+    display: flex;
+    flex-direction: row;
+    top: 0;
+    right: 0;
+    left: 0;
+    position: fixed;
+    align-items: center;
+    justify-content: space-between;
+    height: 55px;
+} 
+.logo{
+    width:50px;
+    mix-blend-mode: multiply;
+    margin-left: 10px;
+    object-fit: cover;
+}
+.info{
+    display: flex;
+    color: #2e5f50;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-right: 15px;
+
+}
+.image{
+    min-width: 333px;
+}
+.home,.Contact,.About{
+    width: 80px;
+    display: flex;
+    justify-content: center;
+    padding: 9px 0px;
+}
+.About{
+    cursor: pointer; 
+    margin-left: 4px;
+}
+.cart{
+    width: 80px;
+    display: flex;
+    justify-content: space-around;
+    padding: 9px 0px;
+
+} 
+.home,.Contact,.cart{
+    cursor: pointer;
+    color: #2e5f50;
+}
+.home:hover,.Contact:hover,.About:hover,.cart:hover {
+opacity: 0.8;
+background-color:#fefefe;
+
+transition: all 0.05s;
+border-radius: 53px;
+
+}
+
+.login:hover.signup:hover {
+    opacity: 0.8;
+    background-color: #1a1d1c;
+    color: rgb(0, 0, 0);
+    transition: all 0.25s;
+    border-radius: 33px;
+}
+
+a{
+    text-decoration: none;
+    color: inherit;
+}
+
+.search{
+    display: flex;
+    width: 40vw;
+    padding: 7px;
+    border-radius: 10px;
+    border: none;
+    box-shadow: 0px 0px 2px;
+    outline: none;
+}
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&display=swap');
+body {
+    font-family: 'Exo 2', sans-serif;
+}
