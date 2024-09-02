@@ -26,10 +26,6 @@ A dynamic web application developed using Python and Flask, designed to offer an
 - Sign up or log in to access additional features
 - Explore the dashboard, update your profile, and interact with the app
 
-## Screenshots
-![Homepage](path/to/homepage-screenshot.png)
-![User Dashboard](path/to/dashboard-screenshot.png)
-
 ## Contributing
 Feel free to open issues or submit pull requests for improvements or new features. Check the [contributing guidelines](CONTRIBUTING.md) for more details.
 
